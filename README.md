@@ -1,6 +1,6 @@
-# hui
+# L-Hui
 
-> A Vue.js project
+> 基于vue.js+element-ui+iview开发的一套前端页面
 
 ## Build Setup
 
