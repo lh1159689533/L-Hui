@@ -1,22 +1,27 @@
 <template>
   <div id="hello">
-    <div style="padding: 20%">
-      <el-row>
-        <el-col :span="6" :offset="9">
-          <el-form :model="user" :rules="rules" ref="userForm" label-width="80px" size="small" label-position="top">
-            <label :class="showClass.name_label_cls" v-show="info.show_name">用户名</label>
-            <el-form-item prop="name">
-              <el-input v-model="user.name" :placeholder="info.plhod_name" @focus="input_name_focus" @blur="input_name_blur" clearable></el-input>
-            </el-form-item>
-            <el-form-item></el-form-item>
-            <label :class="showClass.pass_label_cls" v-show="info.show_pass">密码</label>
-            <el-form-item prop="password">
-              <el-input v-model="user.password" :placeholder="info.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" clearable></el-input>
-            </el-form-item>
-            <Icon type="md-arrow-forward" size="24" color="#ffffff" @click="login('userForm')" />
-          </el-form>
-        </el-col>
-      </el-row>
+    <div style="padding: 15%">
+      <el-container>
+        <el-header><span>L-HUI</span></el-header>
+        <el-main>
+          <el-row>
+            <el-col :span="6" :offset="9">
+              <el-form :model="user" :rules="rules" ref="userForm" label-width="80px" size="small" label-position="top">
+                <label :class="showClass.name_label_cls" v-show="info.show_name">用户名</label>
+                <el-form-item prop="name">
+                  <el-input v-model="user.name" :placeholder="info.plhod_name" @focus="input_name_focus" @blur="input_name_blur" clearable></el-input>
+                </el-form-item>
+                <el-form-item></el-form-item>
+                <label :class="showClass.pass_label_cls" v-show="info.show_pass">密码</label>
+                <el-form-item prop="password">
+                  <el-input v-model="user.password" :placeholder="info.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" clearable></el-input>
+                </el-form-item>
+                <Icon type="md-arrow-forward" size="24" color="#ffffff" @click="login('userForm')" />
+              </el-form>
+            </el-col>
+          </el-row>
+        </el-main>
+      </el-container>
     </div>
   </div>
 </template>
@@ -112,7 +117,7 @@ export default {
       var user = this.user
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post('/user/login', user).then(res => {
+          axios.post('/hui/user/login', user).then(res => {
             console.log("res:",res)
             if (res.code === 1) {
               this.$notify({
@@ -149,6 +154,10 @@ export default {
 </script>
 
 <style>
+  .el-header {
+    color: #409EFF;
+    font-size: 26px;
+  }
   .el-input__inner {
     border:1px solid #808695;
     border-top-style: none;

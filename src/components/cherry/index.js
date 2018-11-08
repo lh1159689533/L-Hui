@@ -38,7 +38,6 @@ var RENDERER = {
 		}
 	},
 	render : function(){
-		console.log("num:"+this.cherries.length);
 		requestAnimationFrame(this.render);
 		this.context.clearRect(0, 0, this.width, this.height);
 		
