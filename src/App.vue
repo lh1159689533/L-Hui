@@ -23,7 +23,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100%;
-  /*background-image: url('assets/sign_bg.db29b0fbd2f78dd8c1b8.png');*/
+  background-image: url('assets/IDR_THEME_NTP_BACKGROUND.png');
   background-color: #b8e5f8;
 }
 #route {
