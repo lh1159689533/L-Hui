@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-button type="primary" @click="get">测试</el-button>
+		<el-button type="primary" @click="get">测试1</el-button>
 		<canvas id="cv"></canvas>
 	</div>
 </template>
