@@ -5,7 +5,7 @@ import { Notification } from 'element-ui'
 
 Vue.prototype.$notify = Notification
 
-axios.defaults.baseURL = 'http://localhost:88'
+axios.defaults.baseURL = 'http://localhost:8888'
 axios.defaults.withCredentials = false
 axios.defaults.timeout = 50000
 

@@ -118,7 +118,6 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           axios.post('/hui/user/login', user).then(res => {
-            console.log("res:",res)
             if (res.code === 1) {
               this.$notify({
                 title: '登录失败',
@@ -128,7 +127,7 @@ export default {
               })
             } else {
               this.$notify({
-                title: '^_^ 登录成功',
+                title: '^_^ 欢迎回来 ' + res.data.name,
                 type: 'success',
                 position: 'bottom-right'
               })
@@ -154,25 +153,26 @@ export default {
 </script>
 
 <style>
-  .el-header {
+  #hello .el-header {
     color: #409EFF;
     font-size: 26px;
   }
-  .el-input__inner {
+  #hello .el-input__inner {
     border:1px solid #808695;
     border-top-style: none;
     border-left-style: none;
     border-right-style: none;
     border-radius: 0;
     background-color: transparent;
+    color: #fff;
   }
-  .name-label {
+  #hello .name-label {
     top: -15px;
   }
-  .pass-label {
+  #hello .pass-label {
     top: 53px;
   }
-  .el-form-label {
+  #hello .el-form-label {
     position: absolute;
     z-index: 1000;
     display: block;
@@ -184,10 +184,10 @@ export default {
     font-family: 'Hiragino Sans GB';
     font-weight: 800;
   }
-  .el-form-label-name-show {
+  #hello .el-form-label-name-show {
     animation:show-name 0.6s ease-in-out 0s backwards;
   }
-  .el-form-label-name-hide {
+  #hello .el-form-label-name-hide {
     animation:hide-name 0.6s ease-in-out 0s backwards;
   }
   @keyframes show-name{
@@ -206,10 +206,10 @@ export default {
       transform:translate3d(15px, 20px, 0);
     }
   }
-  .el-form-label-pass-show {
+  #hello .el-form-label-pass-show {
     animation:show-pass 0.6s ease-in-out 0s backwards;
   }
-  .el-form-label-pass-hide {
+  #hello .el-form-label-pass-hide {
     animation:hide-pass 0.6s ease-in-out 0s backwards;
   }
   @keyframes show-pass{
@@ -228,32 +228,32 @@ export default {
       transform:translate3d(15px, 21px, 0);
     }
   }
-  .ivu-icon {
+  #hello .ivu-icon {
     font-size: 24px;
     position: absolute;
     top: 50%;
     left: 61.5%;
     cursor: pointer;
   }
-  .ivu-icon:hover {
+  #hello .ivu-icon:hover {
     color: #2db7f5 !important;
   }
-  .el-input__inner::-webkit-input-placeholder { /* WebKit browsers */
+  #hello .el-input__inner::-webkit-input-placeholder { /* WebKit browsers */
     color: #409EFF;
     font-weight: 800;
     font-size: 15px;
   }
-  .el-input__inner:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  #hello .el-input__inner:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #409EFF;
     font-weight: 800;
     font-size: 14px;
   }
-  .el-input__inner::-moz-placeholder { /* Mozilla Firefox 19+ */
+  #hello .el-input__inner::-moz-placeholder { /* Mozilla Firefox 19+ */
     color: #409EFF;
     font-weight: 800;
     font-size: 14px;
   }
-  .el-input__inner:-ms-input-placeholder { /* Internet Explorer 10+ */
+  #hello .el-input__inner:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: #409EFF;
     font-weight: 800;
     font-size: 14px;
