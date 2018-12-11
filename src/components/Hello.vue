@@ -2,7 +2,7 @@
   <div id="hello">
     <div style="padding: 15%">
       <el-container>
-        <el-header><span>L-HUI</span></el-header>
+        <el-header><span>LiuH</span></el-header>
         <el-main>
           <el-row>
             <el-col :span="6" :offset="9">
