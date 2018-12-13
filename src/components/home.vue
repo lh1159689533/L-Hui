@@ -29,7 +29,7 @@
                         <template slot="title">
                             <Icon :type="menu.icon"></Icon>{{menu.label}}
                         </template>
-                        <MenuItem v-for="menuChild in menu.child" :name="'[{\'label\':\''+menu.label+'\',\'icon\':\''+menu.icon+'\'},{\'label\':\''+menuChild.label+'\',\'icon\':\'\'}]'" :key="menuChild.name">{{menuChild.label}}</MenuItem>
+                        <MenuItem v-for="menuChild in menu.child" :name="'[{\'label\':\''+menu.label+'\',\'icon\':\''+menu.icon+'\'},{\'label\':\''+menuChild.label+'\',\'icon\':\'\',\'path\':\''+menuChild.path+'\'}]'" :key="menuChild.name">{{menuChild.label}}</MenuItem>
                       </Submenu>
                     </Menu>
                 </Sider>
@@ -40,7 +40,7 @@
                       </BreadcrumbItem>
                     </Breadcrumb>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-                        Content
+                      <router-view/>
                     </Content>
                 </Layout>
             </Layout>
@@ -49,6 +49,7 @@
 </template>
 <script>
   import router from '../router/index'
+  import storage from '../localStorage'
 	export default {
 		name: 'home',
 		data () {
@@ -62,16 +63,15 @@
           name: "",
           icon: 'md-cube',
           child: [
-              { label: '子内容1', name: 'q' },
-              { label: '子内容2', name: 'w' },
-              { label: '子内容3', name: 'e' }
+              { label: '子内容1', name: 'q', path: '' },
+              { label: '子内容2', name: 'w', path: '' },
+              { label: '子内容3', name: 'e', path: '' }
           ]
         },{
-            label: '内容2',
-            icon: 'ios-book',
+            label: '我的小游戏',
+            icon: 'ios-game-controller-b',
             child: [
-              { label: '之内容1', name: "a" },
-              { label: '之内容2', name: "s" }
+              { label: '五子棋', name: 'a', path: 'golang' }
             ]
           }
         ]
@@ -82,10 +82,15 @@
     },
 		methods: {
       init () {
-        let user = localStorage.getItem("user")
+        let user = storage.get("user")
         if (user) {
-          this.currentUser = JSON.parse(user)
+          this.currentUser = user
         } else {
+          this.$notify({
+            title: '-_- 请重新登录 ',
+            type: 'error',
+            position: 'bottom-right'
+          })
           router.push({path: '/'})
         }
       },
@@ -94,6 +99,11 @@
           name = name.replace(/'/g, "\"")
           this.breadcrumbData = JSON.parse(name)
           this.breadcrumbData.unshift(this.defaultBreadcrumb)
+          let len = this.breadcrumbData.length
+          let path = this.breadcrumbData[len-1].path
+          if (path && path != 'undefined' && path != undefined) {
+            router.push({path: '/'+path})
+          }
         }
       },
       oprate (name) {
@@ -101,7 +111,7 @@
           return;
         }
         if (name === "logout") {
-          localStorage.removeItem("user")
+          storage.remove("user")
           router.push({path: '/'})
         } else if (name === "message") {
           console.log(name)

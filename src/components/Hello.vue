@@ -14,7 +14,7 @@
                 <el-form-item></el-form-item>
                 <label :class="showClass.pass_label_cls" v-show="info.show_pass">密码</label>
                 <el-form-item prop="password">
-                  <el-input v-model="user.password" :placeholder="info.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" clearable></el-input>
+                  <el-input type="password" v-model="user.password" :placeholder="info.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" @keyup.enter.native="login('userForm')" clearable></el-input>
                 </el-form-item>
                 <Icon type="md-arrow-forward" size="24" color="#ffffff" @click="login('userForm')" />
               </el-form>
@@ -31,6 +31,7 @@ import axios from '../axios/axios'
 import router from '../router/index'
 import snow from './snow/index'
 import cherry from './cherry/index'
+import storage from '../localStorage'
 export default {
   name: 'Hello',
   data () {
@@ -131,7 +132,7 @@ export default {
                 type: 'success',
                 position: 'bottom-right'
               })
-              localStorage.setItem("user", JSON.stringify(res.data))
+              storage.set("user", res.data)
               router.push({path: '/home'})
             }
           }).catch(error => {
@@ -165,6 +166,7 @@ export default {
     border-radius: 0;
     background-color: transparent;
     color: #fff;
+    font-size: 18px;
   }
   #hello .name-label {
     top: -15px;
