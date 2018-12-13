@@ -3,7 +3,7 @@ import axios from 'axios'
 import router from '../router/index'
 import { Notification } from 'element-ui'
 
-Vue.prototype.$notify = Notification
+// Vue.prototype.$notify = Notification
 
 axios.defaults.baseURL = 'http://localhost:8888'
 axios.defaults.withCredentials = false

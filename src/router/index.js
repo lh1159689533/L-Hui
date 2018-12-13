@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Hello'
 import Home from '@/components/home'
 import Gobang from '@/components/gobang'
+import Tzfe from '@/components/tzfe'
 
 Vue.use(Router)
 
@@ -21,6 +22,9 @@ export default new Router({
         {
           path: '/golang',
           component: Gobang
+        },{
+          path: '/2048',
+          component: Tzfe
         }
       ]
     }

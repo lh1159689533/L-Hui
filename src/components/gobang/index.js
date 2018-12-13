@@ -1,3 +1,5 @@
+import { Message } from 'element-ui'
+
 let gobang = {};
 
 let chess;
@@ -47,7 +49,7 @@ gobang.init = function(ctx) {
 					myWin[k] ++;
 					computerWin[k] = 6;
 					if(myWin[k] == 5) {
-						window.alert("黑胜");
+						win();
 						over = true;
 					}
 				}
@@ -58,6 +60,35 @@ gobang.init = function(ctx) {
 			}
 		}
 	}
+}
+
+function win() {
+  Message({
+    showClose: true,
+    message: '您在人机大战中取得了胜利',
+    type: 'success',
+    duration: 0,
+    onClose: initGame
+  })
+}
+
+function lose() {
+  Message({
+    showClose: true,
+    message: '您在人机大战中输了...',
+    type: 'warning',
+    duration: 0,
+    onClose: initGame
+  })
+}
+
+function initGame() {
+  clearBoard();
+  initWins();
+  me = true;
+  over = false;
+  context.clearRect(0, 0, 450, 450);
+  drawChessBoard();
 }
 
 function computerAI() {
@@ -131,7 +162,7 @@ function computerAI() {
 			computerWin[k] ++;
 			myWin[k] = 6;
 			if(computerWin[k] == 5) {
-				window.alert("白胜");
+				lose();
 				over = true;
 			}
 		}

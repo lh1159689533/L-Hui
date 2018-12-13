@@ -39,7 +39,7 @@
                         <Icon :type="item.icon"></Icon> {{item.label}}
                       </BreadcrumbItem>
                     </Breadcrumb>
-                    <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
+                    <Content :style="{padding: '24px', minHeight: '280px', background: '#fff', height: '100%'}">
                       <router-view/>
                     </Content>
                 </Layout>
@@ -71,7 +71,8 @@
             label: '我的小游戏',
             icon: 'ios-game-controller-b',
             child: [
-              { label: '五子棋', name: 'a', path: 'golang' }
+              { label: '五子棋', name: 'a', path: 'golang' },
+              { label: '2048', name: 's', path: '2048' }
             ]
           }
         ]
