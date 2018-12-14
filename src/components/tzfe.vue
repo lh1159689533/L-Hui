@@ -29,9 +29,7 @@
       <div class="grid-cell" id="grid-cell-3-3"></div>
     </div>
     <Drawer v-model="drawerinfo.isopen" :title="drawerinfo.title" :closable="false">
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+      
     </Drawer>
     <div id="rank"><Button type="info" ghost @click="rank">历程</Button></div>
   </div>
