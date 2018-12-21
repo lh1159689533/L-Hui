@@ -28,16 +28,25 @@
       <div class="grid-cell" id="grid-cell-3-2"></div>
       <div class="grid-cell" id="grid-cell-3-3"></div>
     </div>
-    <Drawer v-model="drawerinfo.isopen" :title="drawerinfo.title" :closable="false">
-      
-    </Drawer>
+    <HDrawer :drawer-data="drawerinfo">
+      <!-- <Anchor show-ink>
+        <AnchorLink title="月如银钩高高挂，人如蝼蚁踽踽行。" />
+      </Anchor>
+      <Anchor show-ink>
+        <AnchorLink title="身在他乡为异客，心归故里愿长眠。" />
+      </Anchor> -->
+    </HDrawer>
     <div id="rank"><Button type="info" ghost @click="rank">历程</Button></div>
   </div>
 </template>
 <script>
   import tzfe from './tzfe/index'
+  import HDrawer from './HDrawer'
   export default {
     name: 'tzfe',
+    components: {
+      HDrawer
+    },
     data () {
       return {
         score: 0,
@@ -163,13 +172,6 @@
     bottom: 30px;
     right: 50px;
     float: right;
-  }
-  .ivu-drawer {
-    width: 396px !important;
-    top: 6.8%
-  }
-  .ivu-drawer-mask {
-    top: 6.8%;
   }
 </style>
 

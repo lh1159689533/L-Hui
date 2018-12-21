@@ -10,7 +10,6 @@
                 <Dropdown style="float: right;" @on-click="oprate">
                   <a href="javascript:void(0)"> 
                     <Badge :dot="unreadInfo">
-                      <!-- <Avatar icon="ios-person" /> -->
                       <Avatar src="http://localhost:8888/static/Artboard.png" />
                     </Badge>
                     <Icon type="md-arrow-dropdown" />
@@ -23,16 +22,9 @@
               </div>
             </Header>
             <Layout>
-                <Sider hide-trigger style="height:'100%'">
-                    <Menu active-name="" theme="light" width="auto" :open-names="['']" @on-select="selSubMenu" accordion>
-                      <Submenu v-for="menu in menuDate" :name="menu.label" :key="menu.name">
-                        <template slot="title">
-                            <Icon :type="menu.icon"></Icon>{{menu.label}}
-                        </template>
-                        <MenuItem v-for="menuChild in menu.child" :name="'[{\'label\':\''+menu.label+'\',\'icon\':\''+menu.icon+'\'},{\'label\':\''+menuChild.label+'\',\'icon\':\'\',\'path\':\''+menuChild.path+'\'}]'" :key="menuChild.name">{{menuChild.label}}</MenuItem>
-                      </Submenu>
-                    </Menu>
-                </Sider>
+              <Sider collapsible :collapsed-width="78" style="height:'100%'" v-model="isCollapsed" width="240">
+                <Hmenu :menu-list="menuDate" @on-select="selMenu" :class="menuitemClasses"></Hmenu>
+              </Sider>
                 <Layout :style="{padding: '0 24px 24px'}">
                     <Breadcrumb :style="{margin: '24px 0'}">
                       <BreadcrumbItem v-for="(item, i) in breadcrumbData" :key="i">
@@ -50,10 +42,15 @@
 <script>
   import router from '../router/index'
   import storage from '../localStorage'
+  import Hmenu from './HMenu'
 	export default {
-		name: 'home',
+    name: 'home',
+    components: {
+      Hmenu
+    },
 		data () {
 			return {
+        isCollapsed: false,
         unreadInfo: true,
         currentUser: {},
         defaultBreadcrumb: { label: 'Home', icon: 'ios-home' },
@@ -78,8 +75,16 @@
         ]
 			}
 		},
+        computed: {
+            menuitemClasses: function () {
+                return [
+                    'menu-item',
+                    this.isCollapsed ? 'collapsed-menu' : ''
+                ]
+            }
+        },
     mounted: function() {
-      this.init()
+      // this.init()
     },
 		methods: {
       init () {
@@ -95,7 +100,7 @@
           router.push({path: '/'})
         }
       },
-			selSubMenu (name) {
+			selMenu (name) {
         if (name) {
           name = name.replace(/'/g, "\"")
           this.breadcrumbData = JSON.parse(name)
@@ -132,7 +137,6 @@
       width: 200px;
       height: 50px;
       float: left;
-      /* position: relative; */
       color: #fff;
       font-size: 30px;
       letter-spacing: 5px;
@@ -141,11 +145,6 @@
       width: 420px;
       margin: 0 auto;
       margin-right: 20px;
-  }
-  #home .ivu-menu-light {
-    height: 100% !important;
-    text-align: left;
-    /* background: #001529; */
   }
   #home .ivu-layout {
     height: 100% !important;
