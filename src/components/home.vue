@@ -60,29 +60,28 @@
           name: "",
           icon: 'md-cube',
           child: [
-              { label: '子内容1', name: 'q', path: '' },
-              { label: '子内容2', name: 'w', path: '' },
-              { label: '子内容3', name: 'e', path: '' }
+            { label: '子内容1', name: 'q', path: '' },
+            { label: '子内容2', name: 'w', path: '' },
+            { label: '子内容3', name: 'e', path: '' }
           ]
         },{
-            label: '我的小游戏',
-            icon: 'ios-game-controller-b',
-            child: [
-              { label: '五子棋', name: 'a', path: 'golang' },
-              { label: '2048', name: 's', path: '2048' }
-            ]
-          }
-        ]
+          label: '我的小游戏',
+          icon: 'ios-game-controller-b',
+          child: [
+            { label: '五子棋', name: 'a', path: 'golang' },
+            { label: '2048', name: 's', path: '2048' }
+          ]
+        }]
 			}
 		},
-        computed: {
-            menuitemClasses: function () {
-                return [
-                    'menu-item',
-                    this.isCollapsed ? 'collapsed-menu' : ''
-                ]
-            }
-        },
+    computed: {
+      menuitemClasses: function () {
+        return [
+          'menu-item',
+          this.isCollapsed ? 'collapsed-menu' : ''
+        ]
+      }
+    },
     mounted: function() {
       // this.init()
     },
