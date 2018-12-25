@@ -1,0 +1,39 @@
+#main {
+  top: 100px;
+  left: 75%;
+  width: 20%;
+  height: 60%;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 60px 1px #666;
+  box-shadow: 1px 1px 60px 1px #666;
+  position: relative;
+  transform-style: preserve-3d;
+  transform:rotateY(0deg);
+  overflow: hidden;
+}
+.log {
+  animation:login-to-register 3s ease-in-out 0s backwards;
+  transform:rotateY(180deg) !important;
+}
+.reg {
+  animation:register-to-login 3s ease-in-out 0s backwards;
+  transform:rotateY(0deg) !important;
+}
+@keyframes login-to-register {
+  0%{
+    transform:rotateY(360deg);
+  }
+  100%{
+    transform:rotateY(180deg);
+  }
+}
+
+@keyframes register-to-login {
+  0%{
+    transform:rotateY(180deg);
+  }
+  100%{
+    transform:rotateY(0deg);
+  }
+}

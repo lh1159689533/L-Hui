@@ -1,10 +1,10 @@
 <template>
-  <div id="login">
+  <div id="login" class="login">
     <el-header><span>LiuH</span></el-header>
     <el-main>
       <el-row>
-        <el-col :span="6" :offset="9">
-          <el-form :model="user" :rules="rules" ref="userForm" label-width="80px" size="small" label-position="top">
+        <el-col :span="16" :offset="4">
+          <el-form :model="user" :rules="rules" ref="loginForm" label-width="80px" size="small" label-position="top">
             <label :class="showClass.name_label_cls" v-show="info.show_name">用户名</label>
             <el-form-item prop="name">
               <el-input v-model="user.name" :placeholder="info.plhod_name" @focus="input_name_focus" @blur="input_name_blur" clearable></el-input>
@@ -12,23 +12,24 @@
             <el-form-item></el-form-item>
             <label :class="showClass.pass_label_cls" v-show="info.show_pass">密码</label>
             <el-form-item prop="password">
-              <el-input type="password" v-model="user.password" :placeholder="info.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" @keyup.enter.native="login('userForm')" clearable></el-input>
+              <el-input type="password" v-model="user.password" :placeholder="info.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" @keyup.enter.native="login('loginForm')" clearable></el-input>
             </el-form-item>
-            <Icon type="md-arrow-forward" size="24" color="#ffffff" @click="login('userForm')" />
+            <Icon title="登录" type="md-arrow-forward" size="24" color="#ffffff" @click="login('loginForm')" />
           </el-form>
         </el-col>
       </el-row>
     </el-main>
+    <el-footer>
+      <span @click="toReg"><a>去注册</a></span>
+    </el-footer>
   </div>
 </template>
 <script>
-import axios from '../../axios/axios'
-import router from '../../router/index'
-import snow from '../snow/index'
-import cherry from '../cherry/index'
-import storage from '../../localStorage'
+import axios from '../../../axios/axios'
+import router from '../../../router/index'
+import storage from '../../../localStorage'
 export default {
-  name: 'Login',
+  name: 'HLogin',
   data () {
     return {
       user: {
@@ -43,7 +44,8 @@ export default {
       },
       showClass: {
         name_label_cls: '',
-        pass_label_cls: ''
+        pass_label_cls: '',
+        email_label_cls: ''
       },
       rules: {
         name: [
@@ -52,36 +54,15 @@ export default {
         password: [
           {required: true, message: '请输入密码', trigger: 'blur'}
         ]
-      },
-      season: 'Spring',
-      seasons: [{
-        label: '春',
-        value: 'Spring'
-      }, {
-        label: '夏',
-        value: 'Summer'
-      }, {
-        label: '秋',
-        value: 'Autumn'
-      }, {
-        label: '冬',
-        value: 'Winter'
-      }]
+      }
     }
   },
-  mounted: function() {
-    this.init()
-  },
   methods: {
-    init () {
-      let n = Math.random() * 10
-      if (n < 5) {
-        cherry.init(document.getElementById('cv'))
-      } else {
-        snow.init(document.getElementById('cv'))
-      }
+    toReg () {
+      this.$emit("trigger")
     },
     input_name_focus () {
+      console.log(11)
       this.info.show_name = true
       this.info.plhod_name = ''
       this.showClass.name_label_cls = 'el-form-label name-label el-form-label-name-show'
@@ -147,7 +128,6 @@ export default {
   }
 }
 </script>
-
 <style>
 @import './login.css';
 </style>
