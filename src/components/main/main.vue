@@ -1,7 +1,11 @@
 <template>
   <div id="main" :class="cls">
-    <HRegister :style="regcls" @trigger="trig"></HRegister>
-    <HLogin :style="logcls" @trigger="trig"></HLogin>
+    <HRegister :style="regcls" @trigger="trig">
+      <div class="trigger" @mousedown="move"></div>
+    </HRegister>
+    <HLogin :style="logcls" @trigger="trig">
+      <div class="trigger" @mousedown="move"></div>
+    </HLogin>
   </div>
 </template>
 <script>
@@ -25,7 +29,9 @@ export default {
       cls: '',
       clsKey: true,
       logcls: { top:0, zIndex:999 },
-      regcls: { top:'100%', zIndex:0 }
+      regcls: { top:'100%', zIndex:0 },
+      x: 0,
+      y: 0
     }
   },
   methods: {
@@ -44,6 +50,19 @@ export default {
       } else {
         this.logcls = { top:0, zIndex:999 }
         this.regcls = { top:'100%', zIndex:0 }
+      }
+    },
+    move (e) {
+      const moveDiv = document.getElementById('main');
+      this.x = e.clientX - moveDiv.offsetLeft;
+      this.y = e.clientY - moveDiv.offsetTop;
+      document.onmousemove = (e) => {
+          moveDiv.style.left = (e.clientX - this.x) + 'px';
+          moveDiv.style.top = (e.clientY - this.y) + 'px';
+      };
+      document.onmouseup = (e) => {
+          document.onmousemove = null;
+          document.onmouseup = null;
       }
     }
   }

@@ -37,3 +37,10 @@
     transform:rotateY(0deg);
   }
 }
+.trigger {
+  height: 30px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  cursor: move;
+}

@@ -1,5 +1,6 @@
 <template>
   <div id="register" class="register">
+      <slot></slot>
       <el-header><span>LiuH</span></el-header>
       <el-main>
         <el-row>
@@ -7,12 +8,12 @@
             <el-form :model="userReg" :rules="rules" ref="regForm" label-width="80px" size="small" label-position="top">
               <label :class="regshowClass.name_label_cls" v-show="reginfo.show_name">用户名</label>
               <el-form-item prop="name">
-                <el-input v-model="userReg.rname" :placeholder="reginfo.plhod_name" @focus="input_name_focus" @blur="input_name_blur" clearable></el-input>
+                <el-input v-model="userReg.name" :placeholder="reginfo.plhod_name" @focus="input_name_focus" @blur="input_name_blur" clearable></el-input>
               </el-form-item>
               <el-form-item></el-form-item>
               <label :class="regshowClass.pass_label_cls" v-show="reginfo.show_pass">密码</label>
               <el-form-item prop="password">
-                <el-input type="password" v-model="userReg.rpassword" :placeholder="reginfo.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" clearable></el-input>
+                <el-input type="password" v-model="userReg.password" :placeholder="reginfo.plhod_pass" @focus="input_pass_focus" @blur="input_pass_blur" clearable></el-input>
               </el-form-item>
               <el-form-item></el-form-item>
               <label :class="regshowClass.email_label_cls" v-show="reginfo.show_email">邮箱</label>
@@ -32,6 +33,7 @@
     </div>
 </template>
 <script>
+import axios from '../../../axios/axios'
 export default {
   name: 'HRegister',
   data () {
@@ -113,8 +115,32 @@ export default {
         this.regshowClass.email_label_cls = 'el-form-label email-label el-form-label-email-hide'
       }
     },
-    register () {
-
+    register (formName) {
+      const user = this.userReg
+      const _this = this
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          axios.post('/hui/register', user).then((res) => {
+            this.$notify({
+              title: '注册成功,请登录',
+              type: 'success',
+              position: 'bottom-right'
+            })
+            _this.toLog()
+            _this.userReg = {}
+          }).catch((err) => {
+            console.log(err)
+            this.$notify({
+              title: '注册失败',
+              type: 'error',
+              message: err.message,
+              position: 'bottom-right'
+            })
+          })
+        } else {
+          console.log(valid)
+        }
+      })
     }
   }
 }

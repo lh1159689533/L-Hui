@@ -1,5 +1,6 @@
 <template>
   <div id="login" class="login">
+    <slot></slot>
     <el-header><span>LiuH</span></el-header>
     <el-main>
       <el-row>
@@ -62,7 +63,6 @@ export default {
       this.$emit("trigger")
     },
     input_name_focus () {
-      console.log(11)
       this.info.show_name = true
       this.info.plhod_name = ''
       this.showClass.name_label_cls = 'el-form-label name-label el-form-label-name-show'
