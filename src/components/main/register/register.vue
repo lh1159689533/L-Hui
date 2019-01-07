@@ -120,14 +120,16 @@ export default {
       const _this = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post('/hui/register', user).then((res) => {
-            this.$notify({
-              title: '注册成功,请登录',
-              type: 'success',
-              position: 'bottom-right'
-            })
-            _this.toLog()
-            _this.userReg = {}
+          axios.post('/hui/user/register', user).then((res) => {
+            if (res.code == 0) {
+              this.$notify({
+                title: '注册成功,请登录',
+                type: 'success',
+                position: 'bottom-right'
+              })
+              _this.toLog()
+              _this.userReg = {}
+            }
           }).catch((err) => {
             console.log(err)
             this.$notify({
